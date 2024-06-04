@@ -1,350 +1,118 @@
-// import React, { Component, useState } from 'react';
-// import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native'; 
+// import React, { Component } from 'react';
+// import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'; 
+// import FontAwesome from 'react-native-vector-icons/FontAwesome' 
+// import Feather from 'react-native-vector-icons/Feather'
 
-// export default function App(){
-
-//   const [nome, setNome] = useState('Mateus')
-//   const [input,setInput] = useState('')
-
-//   function alteraNome(){
-//     setNome(input)
-//   }
-
-//  return(
-//   <View style={styles.container}>
-
-//     <TextInput
-//     placeholder='Seu nome eh....'
-//     value={input}
-//     onChangeText={(texto)=> setInput(texto)}
-//     />
+// class App extends Component{
 
 
-//     <TouchableOpacity style={styles.btn} onPress={alteraNome}>
-//       <Text style={styles.btnText}>Altera nome</Text>
-//     </TouchableOpacity>
+//   constructor(props){
+//     super(props);
+//     this.state={
 
-//     <Text style={styles.texto}>{nome}</Text>
-//   </View>
-//  )
-// }
-
-// const styles = StyleSheet.create({
-//   container:{
-//     flex:1,
-//     marginTop:15,
-//   },
-//   texto:{
-//     color:"#000",
-//     fontSize:35,
-//   },
-//   btn:{
-//     backgroundColor:"#222",
-//     alignItems:"center"
-//   },
-//   btnText:{
-//     color:"#fff"
-//   }
-// })
-//-----------------------------------------------------
-// AULA 1
-//---------------------------------------------------
-
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import React, {useState, useEffect} from "react";
-// import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native'; 
-
-// export default function App(){
-
-//   const [nome, setNome] = useState('')
-//   const [input,setInput] = useState('')
-
-//   useEffect(()=>{
-
-//     async function getStorage(){
-//       const nomeStorage = await AsyncStorage.getItem('nomes');
-//       if(nomeStorage !== null){
-//         setNome(nomeStorage);
-//       }
 //     }
-//     getStorage()
-
-//   },[])
-
-//   useEffect(()=>{
-    
-//     async function saveStorage(){
-//       await AsyncStorage.setItem('nomes', nome)
-//     }
-//       saveStorage()
-
-//   }, [nome])
-
-//   function alteraNome(){
-//     setNome(input)
-//     setInput('')
 //   }
 
-//  return(
-//   <View style={styles.container}>
+//   render(){
 
-//     <TextInput
-//     placeholder='Seu nome eh....'
-//     value={input}
-//     onChangeText={(texto)=> setInput(texto)}
-//     />
+//     return(
+//       <View style={styles.container}>
+//         <Text>Sujeito progamador</Text>
+//         <FontAwesome
+//         name="home"
+//         size={25}
+//         color="#11118c"
+//         />
+//         <FontAwesome
+//         name="user"
+//         size={25}
+//         color="#54a300"
+//         />
+//         <Feather
+//           name="gift"
+//           size={25}
+//           color="#111"
+//         />
 
+//         <TouchableOpacity style={styles.btnYoutube}>
+//           <FontAwesome
+//             name="youtube"
+//             size={25}
+//             color="#fff"
+//           />
+//           <Text style={styles.btnText}>Acessar Canal</Text>
+//         </TouchableOpacity>
 
-//     <TouchableOpacity style={styles.btn} onPress={alteraNome}>
-//       <Text style={styles.btnText}>Altera nome</Text>
-//     </TouchableOpacity>
-
-//     <Text style={styles.texto}>{nome}</Text>
-//   </View>
-//  )
+//       </View>
+//     );
+//   }
 // }
 // const styles = StyleSheet.create({
 //   container:{
 //     flex:1,
-//     marginTop:15,
-//   },
-//   texto:{
-//     color:"#000",
-//     fontSize:35,
-//   },
-//   btn:{
-//     backgroundColor:"#222",
+//     justifyContent:"center",
 //     alignItems:"center"
 //   },
-//   btnText:{
-//     color:"#fff"
-//   }
-// })
-
-
-
-//-----------------------------------------------------
-// AULA 2
-//---------------------------------------------------
-
-
-
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import React, {useState, useEffect, useMemo, useRef} from "react";
-// import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native'; 
-
-// export default function App(){
-
-//   const [nome, setNome] = useState('')
-//   const [input,setInput] = useState('')
-//   const nomeInput = useRef(null);
-
-//   useEffect(()=>{
-
-//     async function getStorage(){
-//       const nomeStorage = await AsyncStorage.getItem('nomes');
-//       if(nomeStorage !== null){
-//         setNome(nomeStorage);
-//       }
-//     }
-//     getStorage()
-
-//   },[])
-
-//   useEffect(()=>{
-    
-//     async function saveStorage(){
-//       await AsyncStorage.setItem('nomes', nome)
-//     }
-//       saveStorage()
-
-//   }, [nome])
-
-//   function alteraNome(){
-//     setNome(input)
-//     setInput('')
-//   }
-
-//   function novoNome(){
-//     nomeInput.current.focus();
-//   }
-
-//   const letrasNome = useMemo(()=>{
-//     console.log("Mudou letras");
-//     return nome.length
-//   }, [nome])
-//   console.log(letrasNome)
-
-//  return(
-//   <View style={styles.container}>
-
-//     <TextInput
-//     placeholder='Seu nome eh....'
-//     value={input}
-//     onChangeText={(texto)=> setInput(texto)}
-//     ref={nomeInput}
-//     />
-
-
-//     <TouchableOpacity style={styles.btn} onPress={alteraNome}>
-//       <Text style={styles.btnText}>Altera nome</Text>
-//     </TouchableOpacity>
-
-//     <Text style={styles.texto}>{nome}</Text>
-//     <Text style={styles.texto}> tem {letrasNome} letras</Text>
-
-//     <TouchableOpacity onPress={novoNome}>
-//       <Text>Novo Nome</Text>
-//     </TouchableOpacity>
-
-//   </View>
-//  )
-// }
-// const styles = StyleSheet.create({
-//   container:{
-//     flex:1,
-//     marginTop:15,
-//   },
-//   texto:{
-//     color:"#000",
-//     fontSize:35,
-//   },
-//   btn:{
-//     backgroundColor:"#222",
-//     alignItems:"center"
+//   btnYoutube:{
+//     flexDirection:"row",
+//     alignItems:"center",
+//     justifyContent:"center",
+//     padding:5,
+//     backgroundColor:"#ff0000",
+//     borderRadius:5
 //   },
 //   btnText:{
-//     color:"#fff"
+//     paddingLeft:10,
+//     color:"#FFF"
 //   }
-// })
   
-//-----------------------------------------------------
-// AULA 3 E 4
-//---------------------------------------------------
+// })
 
-import React, { useState, useRef } from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Keyboard} from 'react-native';
-import api from './src/services/api';
+// export default App;
+
+//aula icons
+
+
+import React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Home from './src/pages/Home';
+import Sobre from './src/pages/Sobre';
+
+const Stack = createNativeStackNavigator();
 
 export default function App(){
-  const [cep, setCep] = useState('');
-  const inputRef = useRef(null);
-  const [cepUser, setCepUser] = useState(null);
-
-
-  async function buscar(){
-    if(cep == ''){
-      alert('Digite um cep valido');
-      setCep('');
-      return; //
-    }
-
-    try{
-      const response = await api.get(`/${cep}/json`);
-      console.log(response.data);
-      setCepUser(response.data);
-      Keyboard.dismiss(); //Garantir que o teclado sera fechado!
-
-    }catch(error){
-      console.log('ERROR: ' + error);
-    }
-
-
-  }
-
-  function limpar(){
-    setCep('');
-    inputRef.current.focus();
-    setCepUser(null);
-  }
-
   return(
-    <SafeAreaView style={styles.container}>
-      <View style={{alignItems: 'center'}}>
-        <Text style={styles.text}>Digite o cep desejado</Text>
-        <TextInput
-        style={styles.input}
-        placeholder="Ex: 79003241"
-        value={cep}
-        onChangeText={ (texto) => setCep(texto) }
-        keyboardType="numeric"
-        ref={inputRef}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="Home" 
+        component={Home} 
+        options={
+          {
+            title:'Tela Inicio',
+            headerStyle:{
+              backgroundColor:"#121212"
+            },
+            headerTintColor:"#fff",
+            headerShown:true
+          }
+        }
         />
-      </View>
 
-      <View style={styles.areaBtn}>
-        <TouchableOpacity 
-        style={[styles.botao, { backgroundColor: '#1d75cd' }]}
-        onPress={ buscar }
-        >
-          <Text style={styles.botaoText}>Buscar</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-        style={[styles.botao, { backgroundColor: '#cd3e1d' }]}
-        onPress={ limpar }
-        >
-          <Text style={styles.botaoText}>Limpar</Text>
-        </TouchableOpacity>
-      </View>
-
-
-      { cepUser &&
-        <View style={styles.resultado}>
-          <Text style={styles.itemText}>CEP: {cepUser.cep}</Text>
-          <Text style={styles.itemText}>Logradouro: {cepUser.logradouro}</Text>
-          <Text style={styles.itemText}>Bairro: {cepUser.bairro}</Text>
-          <Text style={styles.itemText}>Cidade: {cepUser.localidade}</Text>
-          <Text style={styles.itemText}>Estado: {cepUser.uf}</Text>
-        </View>
-      }
-
-    </SafeAreaView>
-  );
+        <Stack.Screen 
+        name="Sobre" 
+        component={Sobre}
+        options={
+          {
+            title:'Tela Inicio',
+            
+          }
+        } 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  },
-  text:{
-    marginTop: 25,
-    marginBottom: 15,
-    fontSize: 25,
-    fontWeight: 'bold'
-  },
-  input:{
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 5,
-    width: '90%',
-    padding: 10,
-    fontSize: 18
-  },
-  areaBtn:{
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginTop: 15,
-    justifyContent: 'space-around'
-  },
-  botao:{
-   height: 50,
-   justifyContent: 'center',
-   alignItems: 'center',
-   padding: 15,
-   borderRadius: 5,
-  },
-  botaoText:{
-    fontSize: 22,
-    color:'#FFF'
-  },
-  resultado:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
-  },
-  itemText:{
-    fontSize: 22,
-  }
-});
