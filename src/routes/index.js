@@ -8,6 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import StackRoutes from './stackRoutes';
 import Sobre from '../pages/Sobre';
 import Contato from '../pages/Contato';
+import CustomDrawer from '../components/CustomDrawer'
 
 const Drawer = createDrawerNavigator();
 
@@ -15,15 +16,14 @@ const Drawer = createDrawerNavigator();
 export default function Routes(){
   return(
       <Drawer.Navigator
+      drawerContent={CustomDrawer}
       screenOptions={{
-        headerShown:true,
-        drawerStyle:{
-          backgroundColor:"#121212"
-        },
-        drawerActiveBackgroundColor:"#3b3dbf",
+        headerShown:false,
+     
+        drawerActiveBackgroundColor:"#00DAE4",
         drawerActiveTintColor:"#fff",
 
-        drawerInactiveBackgroundColor:"#ccc",
+        drawerInactiveBackgroundColor:"#F1F1F1",
         drawerInactiveTintColor:"#000"
         
       }}
