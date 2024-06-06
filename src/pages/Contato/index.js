@@ -5,15 +5,12 @@ import { View, Text, StyleSheet, Button } from "react-native";
 export default function Contato(){
 
 
-    const navigation = useNavigation()
+   
 
-    function handleHome(){
-       navigation.dispatch(StackActions.popToTop())
-    }
+    
     return(
         <View style={ styles.container}>
             <Text >Pagina contato</Text>
-            <Button title="voltar Home" onPress={handleHome}/>
         </View>
     )
 }

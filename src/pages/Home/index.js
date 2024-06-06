@@ -3,18 +3,20 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
+
 export default function Home(){
   const navigation = useNavigation();
 
-  function navegaSobre(){
-    navigation.navigate('Sobre', { nome:'eia eia eia', email:"mateus@teste.com" })
+  function navegaDetalhes(){
+    navigation.navigate("Detalhes")
   }
 
   return(
     <View style={styles.container}>
       <Text>Tela HOME</Text>
-      <Button title="Ir para sobre" onPress={ navegaSobre } />
-      <Button title='Voltar' onPress={navigation.goBack()}/>
+      <Button title="Ir para detalhes" onPress={ navegaDetalhes } />
+      <Button title='abri drawer'  onPress={()=>navigation.openDrawer()}/>
+      
     </View>
   )
 }

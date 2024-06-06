@@ -72,52 +72,17 @@
 
 //aula icons
 
-
+import 'react-native-gesture-handler';
 import React from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import Home from './src/pages/Home';
-import Sobre from './src/pages/Sobre';
-import Contato from './src/pages/Contato';
-
-const Stack = createNativeStackNavigator();
+import Routes from './src/routes'
 
 export default function App(){
   return(
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen 
-        name="Home" 
-        component={Home} 
-        options={
-          {
-            title:'Tela Inicio',
-            headerStyle:{
-              backgroundColor:"#121212"
-            },
-            headerTintColor:"#fff",
-            headerShown:true
-          }
-        }
-        />
-
-        <Stack.Screen 
-        name="Sobre" 
-        component={Sobre}
-        options={
-          {
-            title:'Tela Inicio',
-            
-          }
-        } 
-        />
-        <Stack.Screen 
-        name="Contato" 
-        component={Contato}
-        />
-      </Stack.Navigator>
+      <Routes/>
     </NavigationContainer>
   )
+  
 }
+
