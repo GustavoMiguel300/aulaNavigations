@@ -1,88 +1,92 @@
-// import React, { Component } from 'react';
-// import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'; 
-// import FontAwesome from 'react-native-vector-icons/FontAwesome' 
-// import Feather from 'react-native-vector-icons/Feather'
+import React, { useState, useEffect } from 'react';
+import { View, Text ,StyleSheet, TextInput,Button} from 'react-native';
 
-// class App extends Component{
+import firebase from './src/firebaseConnection';
 
-
-//   constructor(props){
-//     super(props);
-//     this.state={
-
-//     }
-//   }
-
-//   render(){
-
-//     return(
-//       <View style={styles.container}>
-//         <Text>Sujeito progamador</Text>
-//         <FontAwesome
-//         name="home"
-//         size={25}
-//         color="#11118c"
-//         />
-//         <FontAwesome
-//         name="user"
-//         size={25}
-//         color="#54a300"
-//         />
-//         <Feather
-//           name="gift"
-//           size={25}
-//           color="#111"
-//         />
-
-//         <TouchableOpacity style={styles.btnYoutube}>
-//           <FontAwesome
-//             name="youtube"
-//             size={25}
-//             color="#fff"
-//           />
-//           <Text style={styles.btnText}>Acessar Canal</Text>
-//         </TouchableOpacity>
-
-//       </View>
-//     );
-//   }
-// }
-// const styles = StyleSheet.create({
-//   container:{
-//     flex:1,
-//     justifyContent:"center",
-//     alignItems:"center"
-//   },
-//   btnYoutube:{
-//     flexDirection:"row",
-//     alignItems:"center",
-//     justifyContent:"center",
-//     padding:5,
-//     backgroundColor:"#ff0000",
-//     borderRadius:5
-//   },
-//   btnText:{
-//     paddingLeft:10,
-//     color:"#FFF"
-//   }
-  
-// })
-
-// export default App;
-
-//aula icons
-
-import 'react-native-gesture-handler';
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import Routes from './src/routes'
+console.disableYellowBox=true;
 
 export default function App(){
-  return(
-    <NavigationContainer>
-      <Routes/>
-    </NavigationContainer>
-  )
-  
-}
+  const [nome, setNome] = useState('');
+  const [cargo,setCargo] = useState('')
 
+  useEffect(()=>{
+    async function dados(){
+      // await firebase.database().ref('usuarios/1').on('value',(snapshot)=>{
+      //   setNome(snapshot.val().nome);
+      //   setIdade(snapshot.val().idade)
+      // })
+
+      //criar um no
+      //await firebase.database().ref('tipo').set('Cliente')
+
+      //remover um no
+      // await firebase.database().ref('usuario').remove();
+
+      //adicionar um no
+      // await firebase.database().ref('usuarios').child(3).set({
+      //   nome:'Jose',
+      //   cargo: 'progamador'
+      // })
+
+    }
+    dados();
+  },[])
+  
+  async function cadastrar(){
+    if(nome !== '' & cargo !== ''){
+      let usuarios =  await firebase.database().ref('usuarios');
+      let chave = usuarios.push().key
+
+      usuarios.child(chave).set({
+        nome:nome,
+        cargo:cargo
+      })
+      setCargo(''),
+      setNome('')
+    }
+  }
+
+  return(
+    <View style={ styles.container}>
+      <Text style={ styles.texto}>Nome</Text>
+      <TextInput
+      style={ styles.input}
+      underlineColorAndroid='transparent'
+      onChangeText={(texto)=>setNome(texto)}
+      value={nome}
+      />
+
+      <Text style={ styles.texto}>Cargo</Text>
+      <TextInput
+      style={styles.input}
+      underlineColorAndroid='transparent'
+      onChangeText={(texto)=>setCargo(texto)}
+      value={cargo}
+      />
+
+      <Button
+      title='novo funcionario'
+      onPress={cadastrar}
+      />
+
+    </View>
+
+  );
+}
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    margin:10,
+  },
+  texto:{
+    fontSize:20
+  },
+  input:{
+    marginBottom:10,
+    padding:10,
+    borderWidth:1,
+    borderColor:"#121212",
+    height:45,
+    fontSize:17
+  }
+})
