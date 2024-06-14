@@ -1,73 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text ,StyleSheet, TextInput,Button} from 'react-native';
-
+import { View, Text ,StyleSheet, TextInput,Button , FlatList, ActivityIndicator} from 'react-native';
 import firebase from './src/firebaseConnection';
+
 
 console.disableYellowBox=true;
 
 export default function App(){
-  const [nome, setNome] = useState('');
-  const [cargo,setCargo] = useState('')
+  const [email, setEmail] = useState('');
+  const [password,setPassword] = useState('')
+  
 
-  useEffect(()=>{
-    async function dados(){
-      // await firebase.database().ref('usuarios/1').on('value',(snapshot)=>{
-      //   setNome(snapshot.val().nome);
-      //   setIdade(snapshot.val().idade)
-      // })
 
-      //criar um no
-      //await firebase.database().ref('tipo').set('Cliente')
-
-      //remover um no
-      // await firebase.database().ref('usuario').remove();
-
-      //adicionar um no
-      // await firebase.database().ref('usuarios').child(3).set({
-      //   nome:'Jose',
-      //   cargo: 'progamador'
-      // })
-
-    }
-    dados();
-  },[])
   
   async function cadastrar(){
-    if(nome !== '' & cargo !== ''){
-      let usuarios =  await firebase.database().ref('usuarios');
-      let chave = usuarios.push().key
-
-      usuarios.child(chave).set({
-        nome:nome,
-        cargo:cargo
-      })
-      setCargo(''),
-      setNome('')
-    }
+    await firebase.auth().createUserWithEmailAndPassword(email,password)
+    .then((value)=>{
+      alert('usuario criado: ' + value.user.email)
+    })
+    .catch( (error) => {
+      if(error.code === 'auth/weak-password'){
+        alert('sua senha deve conter pelomenos 6 caracteres')
+        return;
+      }
+      if(error.code === 'auth/invalid-email' ){
+        alert('email invalido')
+        return;
+      }else{
+        alert('erro ao cadastrar')
+        return;
+      }
+    })
+    setEmail('')
+    setPassword('')
   }
 
   return(
     <View style={ styles.container}>
-      <Text style={ styles.texto}>Nome</Text>
+      <Text style={ styles.texto}>Email</Text>
       <TextInput
       style={ styles.input}
       underlineColorAndroid='transparent'
-      onChangeText={(texto)=>setNome(texto)}
-      value={nome}
+      onChangeText={(texto)=>setEmail(texto)}
+      value={email}
       />
 
-      <Text style={ styles.texto}>Cargo</Text>
+      <Text style={ styles.texto}>Senha</Text>
       <TextInput
       style={styles.input}
       underlineColorAndroid='transparent'
-      onChangeText={(texto)=>setCargo(texto)}
-      value={cargo}
+      onChangeText={(texto)=>setPassword(texto)}
+      value={password}
       />
 
       <Button
-      title='novo funcionario'
+      title='cadastrar'
       onPress={cadastrar}
       />
+      
 
     </View>
 

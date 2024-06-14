@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "firebase/app";
 import 'firebase/database';
+import 'firebase/auth'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
